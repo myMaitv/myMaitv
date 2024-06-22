@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import Menu from '../base/Menu.vue';
+import SearchBox from '../base/SearchBox.vue';
+
 import { ref, onMounted, computed } from 'vue';
 import logo from '/logo-mytv.svg?url';
 
@@ -23,11 +25,13 @@ onMounted(() => {
       </div>
       <Menu />
     </div>
-    <div class="header__right"></div>
+    <div class="header__right">
+      <SearchBox/>
+    </div>
   </header>
 
 </template>
-<style lang="scss">
+<style lang="scss" scoped>
 .header {
   position: fixed;
   top: 0;

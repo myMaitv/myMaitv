@@ -42,6 +42,7 @@ body {
   font-weight: 200;
   line-height: 1.5;
   background: #111111;
+  color: #fff;
 }
 
 /* Set shorter line heights on headings and interactive elements */
@@ -95,6 +96,6 @@ textarea:not([rows]) {
   scroll-margin-block: 5ex;
 }
 
-body {
+#app {
   height: 2000px;
 }

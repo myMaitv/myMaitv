@@ -1,24 +1,22 @@
 <script setup lang="ts">
 import { reactive } from 'vue';
-import homeIcon from '/src/assets/home.svg?url';
-import movieIcon from '/src/assets/movie.svg?url';
-import tvIcon from '/src/assets/tv.svg?url';
+import Icon from './Icon.vue';
 
 const menus = reactive([
   {
     name: 'Trang chủ',
     path: '/',
-    icon: homeIcon
+    icon: 'home'
   },
   {
     name: 'Phim bộ',
     path: '/phim-bo',
-    icon: movieIcon
+    icon: 'movie'
   },
   {
     name: 'TV Shows',
     path: '/tv-shows',
-    icon: tvIcon
+    icon: 'tv'
   }
 ]);
 </script>
@@ -28,7 +26,7 @@ const menus = reactive([
     <ul class="main-menu__list">
       <li class="main-menu__item" v-for="(menu, index) in menus" :key="index">
         <a class="main-menu__link" :href="menu.path">
-          <span class="main-menu__icon" :style="{ maskImage: `url(${menu.icon})`, WebkitMaskImage: `url(${menu.icon})` }"></span>
+          <Icon :src="menu.icon" class="main-menu__icon"/>
           <span>{{ menu.name }}</span>
         </a>
       </li>
@@ -36,7 +34,7 @@ const menus = reactive([
   </nav>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .main-menu {
   display: flex;
   align-items: center;
@@ -64,18 +62,14 @@ const menus = reactive([
     color: #fff;
     font-weight: 400;
     height: 100%;
-    font-size: 1.1rem;
+    font-size: 0.9rem;
     gap: 10px;
+    transition: color 0.25s;
 
     .main-menu__icon {
-      display: block;
-      mask-size: 100%;
-      -webkit-mask-repeat: no-repeat;
-      mask-repeat: no-repeat;
-      mask-position: center;
-      height: 35px;
-      width: 35px;
-      background: white;
+      height: 25px;
+      width: 25px;
+      transition: background 0.25s;
     }
 
     &:hover {
