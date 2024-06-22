@@ -5,17 +5,17 @@ import Icon from './Icon.vue';
 const menus = reactive([
   {
     name: 'Trang chủ',
-    path: '/',
+    path: 'home',
     icon: 'home'
   },
   {
     name: 'Phim bộ',
-    path: '/phim-bo',
+    path: 'phim-bo',
     icon: 'movie'
   },
   {
     name: 'TV Shows',
-    path: '/tv-shows',
+    path: 'tv-shows',
     icon: 'tv'
   }
 ]);
@@ -25,10 +25,10 @@ const menus = reactive([
   <nav class="main-menu">
     <ul class="main-menu__list">
       <li class="main-menu__item" v-for="(menu, index) in menus" :key="index">
-        <a class="main-menu__link" :href="menu.path">
-          <Icon :src="menu.icon" class="main-menu__icon"/>
+        <RouterLink :to="{ name: menu.path, state: { category: menu.name }, force : true }" class="main-menu__link">
+          <Icon :src="menu.icon" class="main-menu__icon" />
           <span>{{ menu.name }}</span>
-        </a>
+        </RouterLink>
       </li>
     </ul>
   </nav>

@@ -10,12 +10,12 @@ import { ref } from 'vue';
 import Icon from './Icon.vue';
 
 interface InputProps {
-  id: string,
-  label: string,
+  id?: string,
+  label?: string,
   type: string,
-  placeholder: string,
-  modelValue: string,
-  icon: string
+  placeholder?: string,
+  modelValue?: string,
+  icon?: string
 }
 withDefaults(defineProps<InputProps>(),{
   type: 'text',
