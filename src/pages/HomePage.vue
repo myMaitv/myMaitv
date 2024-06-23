@@ -1,8 +1,9 @@
 <script lang="ts" setup>
 import Layout from '../components/layout/Layout.vue';
+import Featuring from '../components/Featuring.vue';
 </script>
 <template>
   <Layout>
-    <h1>Trang chủ</h1>
+    <Featuring/>
   </Layout>
 </template>

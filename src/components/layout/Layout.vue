@@ -5,11 +5,11 @@ import Footer from './Footer.vue';
 
 <template>
   <div class="main-layout">
-    <Header/>
-    <main>
+    <Header class="main-layout__header"/>
+    <main class="main-layout__main">
       <slot/>
     </main>
-    <Footer/>
+    <Footer class="main-layout__footer"/>
   </div>
 </template>
 
@@ -19,8 +19,16 @@ import Footer from './Footer.vue';
   flex-direction: column;
   min-height: 100vh;
   height: 100%;
-  main {
+  &__main {
     flex-grow: 1;
+  }
+
+  &__header {
+    position:fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 99;
   }
 }
 </style>
