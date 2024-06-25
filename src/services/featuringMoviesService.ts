@@ -10,7 +10,7 @@ export const getFeaturingMovies = async (
 ): Promise<FeaturingMovieResponse> => {
   try {
     const response = await api.get<FeaturingMovieResponse>(
-      `/danh-sach/phim-moi-cap-nhat?page=${page}`
+      `/danh-sach/phim-moi-cap-nhat?page=${page}&limit=5`
     );
     return response.data;
   } catch (error) {

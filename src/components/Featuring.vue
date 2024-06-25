@@ -1,14 +1,17 @@
 <script lang="ts" setup>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, onUpdated } from 'vue';
 import { getFeaturingMovies } from '../services/featuringMoviesService';
-import type { FeaturingMovieResponse } from '../services/types';
+import type { FeaturingMovieResponse, MovieInfo } from '../services/types';
 import type { Ref } from 'vue';
+import Carousel from './base/Carousel.vue';
 
-const movies : Ref<FeaturingMovieResponse|null> = ref(null);
+const movies: Ref<FeaturingMovieResponse | null> = ref(null);
+const movieItems: Ref<[MovieInfo] | null> = ref(null);
 
 const fetchMovies = async () => {
   try {
     movies.value = await getFeaturingMovies();
+    movieItems.value = movies.value?.items;
   } catch (error) {
     console.log(`Error fetching featuring movies in component with message: ${error}`);
   }
@@ -21,11 +24,7 @@ onMounted(fetchMovies);
 <template>
   <div class="featuring">
     <div class="featuring__banner">
-      <div class="featuring__banner-slides">
-        <img src="https://kenh14cdn.com/203336854389633024/2024/6/18/1-1433-1718632919958-1718632920090278823002-17186733436311358633289.jpg" alt="">
-      </div>
-    </div>
-    <div class="featuring__title">
+      <Carousel class="featuring__banner-slides" :slides="movieItems" />
     </div>
   </div>
 </template>
@@ -41,7 +40,8 @@ onMounted(fetchMovies);
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: -1;
+    z-index: 0;
+    overflow: hidden;
 
     &::after {
       content: '';
@@ -53,6 +53,7 @@ onMounted(fetchMovies);
       left: -1px;
       z-index: 3;
       background-image: linear-gradient(0deg, #111 0, rgba(17, 17, 17, 0) 82%);
+      pointer-events: none;
     }
 
     &::before {
@@ -65,6 +66,7 @@ onMounted(fetchMovies);
       left: -1px;
       z-index: 2;
       background-image: linear-gradient(0deg, #111 0, rgba(17, 17, 17, 0) 100%);
+      pointer-events: none;
     }
 
     img {
@@ -76,7 +78,7 @@ onMounted(fetchMovies);
 
   &__banner-slides {
     position: relative;
-    z-index: -1;
+    z-index: 0;
     width: 100%;
     height: 100%;
 
@@ -89,9 +91,11 @@ onMounted(fetchMovies);
       top: 0;
       right: 0;
       left: 0;
+      z-index: 1;
       background-blend-mode: multiply;
       mix-blend-mode: multiply;
       background-image: linear-gradient(180deg, #111 0, rgba(17, 17, 17, 0) 100%);
+      pointer-events: none;
     }
   }
 }
