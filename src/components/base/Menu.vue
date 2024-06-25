@@ -25,7 +25,7 @@ const menus = reactive([
   <nav class="main-menu">
     <ul class="main-menu__list">
       <li class="main-menu__item" v-for="(menu, index) in menus" :key="index">
-        <RouterLink :to="{ name: menu.path, state: { category: menu.name }, force : true }" class="main-menu__link">
+        <RouterLink :to="{ name: menu.path, state: { category: menu.name }, force: true }" class="main-menu__link">
           <Icon :src="menu.icon" class="main-menu__icon" />
           <span>{{ menu.name }}</span>
         </RouterLink>
@@ -73,10 +73,10 @@ const menus = reactive([
     }
 
     &:hover {
-      color: #bd4b1f;
+      color: #df5f2d;
 
       .main-menu__icon {
-        background: #bd4b1f;
+        background: #df5f2d;
       }
     }
   }

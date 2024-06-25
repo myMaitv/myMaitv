@@ -1,5 +1,21 @@
 <script lang="ts" setup>
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
+import { getFeaturingMovies } from '../services/featuringMoviesService';
+import type { FeaturingMovieResponse } from '../services/types';
+import type { Ref } from 'vue';
+
+const movies : Ref<FeaturingMovieResponse|null> = ref(null);
+
+const fetchMovies = async () => {
+  try {
+    movies.value = await getFeaturingMovies();
+  } catch (error) {
+    console.log(`Error fetching featuring movies in component with message: ${error}`);
+  }
+}
+
+onMounted(fetchMovies);
+
 </script>
 
 <template>
@@ -68,7 +84,7 @@ import { ref } from 'vue';
       content: '';
       display: block;
       width: 100%;
-      height: 4rem;
+      height: 80px;
       position: absolute;
       top: 0;
       right: 0;

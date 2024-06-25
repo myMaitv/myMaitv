@@ -1,8 +1,8 @@
 <template>
-  <label class="label" for="{{id}}" v-if="label">{{label}}</label>
+  <label class="label" for="{{id}}" v-if="label">{{ label }}</label>
   <div class="input-box">
-    <input class="input-box__input" :id="id" :type="type" :placeholder="placeholder" :value="modelValue"/>
-    <Icon src="search" class="input-box__icon"/>
+    <input class="input-box__input" :id="id" :type="type" :placeholder="placeholder" :value="modelValue" />
+    <Icon src="search" class="input-box__icon" />
   </div>
 </template>
 <script lang="ts" setup>
@@ -17,7 +17,7 @@ interface InputProps {
   modelValue?: string,
   icon?: string
 }
-withDefaults(defineProps<InputProps>(),{
+withDefaults(defineProps<InputProps>(), {
   type: 'text',
   label: '',
   placeholder: '',
@@ -34,6 +34,7 @@ withDefaults(defineProps<InputProps>(),{
   text-transform: uppercase;
   color: #fff;
 }
+
 .input-box {
   position: relative;
   width: 100%;
@@ -70,10 +71,10 @@ withDefaults(defineProps<InputProps>(),{
   }
 
   &:focus-within {
-    border: 1px solid #bd4b1f;
+    border: 1px solid #df5f2d;
 
     .input-box__icon {
-      background: #bd4b1f;
+      background: #df5f2d;
     }
 
     .input-box__input {
