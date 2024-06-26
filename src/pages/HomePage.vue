@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import Layout from '../components/layout/Layout.vue';
-import Featuring from '../components/Featuring.vue';
+import FeaturingMovies from '../components/FeaturingMovies.vue';
 import Loading from '../components/base/Loading.vue';
 
 </script>
@@ -8,7 +8,7 @@ import Loading from '../components/base/Loading.vue';
   <Layout>
     <Transition name="fade">
       <Suspense>
-        <Featuring />
+        <FeaturingMovies />
         <template #fallback>
           <Loading />
         </template>

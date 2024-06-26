@@ -1,6 +1,6 @@
 <template>
-  <div class="icon" v-if="icon" :style="{ maskImage: `url(${icon})`, WebkitMaskImage: `url(${icon})` }">
-  </div>
+  <span class="icon" v-if="icon" :style="{ maskImage: `url(${icon})`, WebkitMaskImage: `url(${icon})` }">
+  </span>
 </template>
 <script setup lang="ts">
 import { ref, watchEffect } from 'vue';

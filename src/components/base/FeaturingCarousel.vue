@@ -1,0 +1,121 @@
+<script setup lang="ts">
+import { reactive } from 'vue';
+import { Splide, SplideSlide } from '@splidejs/vue-splide';
+import '@splidejs/vue-splide/css';
+import type { MovieInfo } from '../../services/types';
+import Button from './Button.vue';
+const props = defineProps<{
+  slides: [any] | null
+}>()
+
+const options = reactive({ rewind: true, type: 'fade', autoplay: true, lazyLoad: true, speed: 1000 })
+
+</script>
+
+<template>
+  <Splide class="featuring-carousel" :options="options" aria-label="Phim nổi bật">
+    <template v-for="movie in slides" :key="movie.id">
+      <SplideSlide class="featuring-carousel__item">
+        <div class="featuring-carousel__image">
+          <!-- <RouterLink :to="{ name: 'home', params: { id: movie.id } }"> -->
+          <img :src="movie.thumb_url" :alt="movie.name">
+        </div>
+        <div class="featuring-carousel__info">
+          <h3 class="featuring-carousel__title">{{ movie.name }}</h3>
+          <p class="featuring-carousel__o-title">{{ movie.origin_name }} - {{ movie.year }}</p>
+          <Button class="featuring-carousel__button" size="large" icon="play" :primary="true">Xem ngay</Button>
+        </div>
+      </SplideSlide>
+    </template>
+  </Splide>
+</template>
+
+<style lang="scss" scoped>
+.featuring-carousel {
+  :deep(.splide__track) {
+    height: 100%;
+  }
+
+  &__info {
+    position: absolute;
+    bottom: 0;
+    left: 5vw;
+    width: 40%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-start;
+    padding: 20px;
+    color: white;
+    gap: 10px;
+  }
+
+  &__title {
+    font-size: 2.5rem;
+  }
+
+  &__o-title {
+    font-size: 1.5rem;
+  }
+
+  &__button {
+    align-self: flex-start;
+    margin-top: 10px;
+  }
+
+  &__image {
+    position: relative;
+    height: 100%;
+    z-index: 0;
+
+    &::after {
+      content: '';
+      width: calc(100% + 2px);
+      height: 36%;
+      position: absolute;
+      right: -1px;
+      bottom: -1px;
+      left: -1px;
+      z-index: 3;
+      background-image: linear-gradient(0deg, #111 0, rgba(17, 17, 17, 0) 82%);
+      pointer-events: none;
+    }
+
+    &::before {
+      content: '';
+      width: calc(100% + 2px);
+      height: 50%;
+      position: absolute;
+      right: -1px;
+      bottom: -1px;
+      left: -1px;
+      z-index: 2;
+      background-image: linear-gradient(0deg, #111 0, rgba(17, 17, 17, 0) 100%);
+      pointer-events: none;
+    }
+  }
+
+  :deep(.splide__pagination) {
+    position: absolute;
+    right: 150px;
+    bottom: 20px;
+    left: auto;
+    transform: translateY(-50%);
+  }
+
+  :deep(.splide__arrows) {
+    position: absolute;
+    right: 50px;
+    bottom: 20px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-self: center;
+  }
+  :deep(.splide__arrow) {
+    position: static;
+    transform: none;
+  }
+}
+</style>

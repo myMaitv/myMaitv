@@ -2,7 +2,7 @@
 import { getFeaturingMovies } from '../services/featuringMoviesService';
 import type { FeaturingMovieResponse, MovieInfo } from '../services/types';
 import type { Ref } from 'vue';
-import Carousel from './base/Carousel.vue';
+import FeaturingCarousel from './base/FeaturingCarousel.vue';
 
 const movies: FeaturingMovieResponse = await getFeaturingMovies();
 const movieItems: [MovieInfo] = await movies.items;
@@ -12,7 +12,7 @@ const movieItems: [MovieInfo] = await movies.items;
 <template>
   <div class="featuring">
     <div class="featuring__banner">
-      <Carousel class="featuring__banner-slides" :slides="movieItems" />
+      <FeaturingCarousel class="featuring__banner-slides" :slides="movieItems" />
     </div>
   </div>
 </template>
@@ -30,32 +30,6 @@ const movieItems: [MovieInfo] = await movies.items;
     height: 100%;
     z-index: 0;
     overflow: hidden;
-
-    &::after {
-      content: '';
-      width: calc(100% + 2px);
-      height: 36%;
-      position: absolute;
-      right: -1px;
-      bottom: -1px;
-      left: -1px;
-      z-index: 3;
-      background-image: linear-gradient(0deg, #111 0, rgba(17, 17, 17, 0) 82%);
-      pointer-events: none;
-    }
-
-    &::before {
-      content: '';
-      width: calc(100% + 2px);
-      height: 50%;
-      position: absolute;
-      right: -1px;
-      bottom: -1px;
-      left: -1px;
-      z-index: 2;
-      background-image: linear-gradient(0deg, #111 0, rgba(17, 17, 17, 0) 100%);
-      pointer-events: none;
-    }
 
     img {
       width: 100%;

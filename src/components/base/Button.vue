@@ -1,0 +1,114 @@
+<script lang="ts" setup>
+import { ref } from 'vue';
+import type { Ref } from 'vue';
+import Icon from './Icon.vue';
+const props = withDefaults(defineProps<{
+  primary?: boolean,
+  type: 'button' | 'submit' | 'reset',
+  icon?: string | null,
+  disabled?: boolean,
+  size?: 'small' | 'medium' | 'large'
+}>(), {
+  primary: false,
+  type: 'button',
+  icon: null,
+  disabled: false,
+  size: 'medium',
+})
+</script>
+
+<template>
+  <button :type="type" class="button" :class="[{ 'button--primary': primary, 'button--disabled': disabled }, `button--${size}`]">
+    <Icon class="button__icon" v-if="icon" :src="icon" />
+    <span class="button__text">
+      <slot></slot>
+    </span>
+  </button>
+</template>
+
+<style lang="scss" scoped>
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  height: 40px;
+  padding: 0 20px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  border-radius: 5px;
+  border: 1px solid white;
+  color: white;
+  background: transparent;
+  transition: background 0.25s, border 0.25s, color 0.25s;
+  cursor: pointer;
+  white-space: nowrap;
+  text-transform: uppercase;
+  outline: none;
+  user-select: none;
+
+  :deep(.icon) {
+    background: white;
+  }
+
+  &:hover {
+    background: white;
+    color: #111;
+
+    :deep(.icon) {
+      background: black;
+    }
+  }
+
+  &--primary {
+    background: white;
+    color: #111;
+
+    :deep(.icon) {
+      background: black;
+    }
+
+    &:hover {
+      background: #f7a05c;
+      border-color: #f7a05c;
+
+      :deep(.icon) {
+        background: #111;
+      }
+    }
+  }
+  &__icon {
+    width: 20px;
+    height: 20px;
+  }
+
+  &__text {
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-transform: uppercase;
+  }
+
+  &--disabled {
+    pointer-events: none;
+    opacity: 0.5;
+  }
+
+  &--small {
+    height: 30px;
+    padding: 0 10px;
+    font-size: 0.8rem;
+  }
+
+  &--large {
+    height: 50px;
+    padding: 0 30px;
+    font-size: 1rem;
+  }
+
+  &--medium {
+    height: 40px;
+    padding: 0 20px;
+    font-size: 0.9rem;
+  }
+}
+</style>
