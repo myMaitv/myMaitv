@@ -26,7 +26,7 @@ onMounted(() => {
       <Menu />
     </div>
     <div class="header__right">
-      <SearchBox/>
+      <SearchBox />
     </div>
   </header>
 
@@ -43,7 +43,7 @@ onMounted(() => {
   height: 70px;
   background: rgb(0, 0, 0, 0);
   transition: background 0.3s;
-  border-bottom: 1px solid #424242b0;
+  border-bottom: 1px solid rgb(147 147 147);
 
   &--bg-active {
     background: rgb(0, 0, 0, 0.4);
