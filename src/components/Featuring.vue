@@ -1,23 +1,11 @@
 <script lang="ts" setup>
-import { ref, onMounted, onUpdated } from 'vue';
 import { getFeaturingMovies } from '../services/featuringMoviesService';
 import type { FeaturingMovieResponse, MovieInfo } from '../services/types';
 import type { Ref } from 'vue';
 import Carousel from './base/Carousel.vue';
 
-const movies: Ref<FeaturingMovieResponse | null> = ref(null);
-const movieItems: Ref<[MovieInfo] | null> = ref(null);
-
-const fetchMovies = async () => {
-  try {
-    movies.value = await getFeaturingMovies();
-    movieItems.value = movies.value?.items;
-  } catch (error) {
-    console.log(`Error fetching featuring movies in component with message: ${error}`);
-  }
-}
-
-onMounted(fetchMovies);
+const movies: FeaturingMovieResponse = await getFeaturingMovies();
+const movieItems: [MovieInfo] = await movies.items;
 
 </script>
 
@@ -30,9 +18,9 @@ onMounted(fetchMovies);
 </template>
 <style lang="scss">
 .featuring {
-  height: 900px;
-  max-height: 100vh;
+  height: 730px;
   position: relative;
+  transition: opacity 1s ease;
 
   &__banner {
     position: absolute;
@@ -74,6 +62,14 @@ onMounted(fetchMovies);
       height: 100%;
       object-fit: cover;
     }
+
+    &.fade-enter-from {
+      opacity: 0;
+    }
+
+    &.fade-enter-to {
+      opacity: 1;
+    }
   }
 
   &__banner-slides {
@@ -86,7 +82,7 @@ onMounted(fetchMovies);
       content: '';
       display: block;
       width: 100%;
-      height: 80px;
+      height: 75px;
       position: absolute;
       top: 0;
       right: 0;
@@ -94,7 +90,7 @@ onMounted(fetchMovies);
       z-index: 1;
       background-blend-mode: multiply;
       mix-blend-mode: multiply;
-      background-image: linear-gradient(180deg, #111 0, rgba(17, 17, 17, 0) 100%);
+      background-image: linear-gradient(180deg, rgb(0, 0, 0) 5%, rgba(0, 0, 0, 0.7) 55%, rgba(17, 17, 17, 0) 100%);
       pointer-events: none;
     }
   }

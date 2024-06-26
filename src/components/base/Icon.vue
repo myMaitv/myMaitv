@@ -29,5 +29,7 @@ watchEffect(async () => {
   mask-repeat: no-repeat;
   mask-position: center;
   background: white;
+  width: 100%;
+  height: 100%;
 }
 </style>
