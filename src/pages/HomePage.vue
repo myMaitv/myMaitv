@@ -15,9 +15,22 @@ import CategoryMovieList from '../components/CategoryMovieList.vue';
       </Suspense>
     </Transition>
     <Suspense>
-      <CategoryMovieList title="Hoạt hình" category="hoat-hinh" />
+      <template #default>
+        <div class="categories">
+          <CategoryMovieList title="Hoạt hình" category="hoat-hinh" />
+          <CategoryMovieList title="Phim bộ" category="phim-bo" />
+          <CategoryMovieList title="TV Shows" category="tv-shows" />
+        </div>
+      </template>
       <template #fallback>
       </template>
     </Suspense>
   </Layout>
 </template>
+<style lang="scss" scoped>
+.categories {
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+}
+</style>

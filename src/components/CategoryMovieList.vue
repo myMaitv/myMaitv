@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import Title from './base/Title.vue';
 import MovieList from './base/MovieList.vue';
+import Button from './base/Button.vue';
 import type { CategoryMoviesResponse, MovieListInfo } from '../services/types';
 import { getCategoryMovies } from '../services/categoryMoviesService';
 const props = defineProps<{
@@ -16,7 +17,10 @@ const APP_DOMAIN_CDN_IMAGE = await categoryMoiveList.data.APP_DOMAIN_CDN_IMAGE;
 
 <template>
   <div class="category">
-    <Title class="category__title">{{ title }}</Title>
+    <div class="category__tilte-container">
+      <Title class="category__title">{{ title }}</Title>
+      <Button type="button" size="small">Xem thêm</Button>
+    </div>
     <div class="category__list">
       <MovieList :movies="movieList" :imgHost="APP_DOMAIN_CDN_IMAGE" />
     </div>
@@ -28,5 +32,11 @@ const APP_DOMAIN_CDN_IMAGE = await categoryMoiveList.data.APP_DOMAIN_CDN_IMAGE;
   display: flex;
   flex-direction: column;
   padding: 0 60px;
+
+  &__tilte-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
 }
 </style>
