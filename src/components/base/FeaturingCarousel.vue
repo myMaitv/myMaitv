@@ -14,7 +14,7 @@ const options = reactive({ rewind: true, type: 'fade', autoplay: true, lazyLoad:
 
 <template>
   <Splide class="featuring-carousel" :options="options" aria-label="Phim nổi bật">
-    <template v-for="movie in slides" :key="movie.id">
+    <template v-for="(movie) in slides" :key="movie.id">
       <SplideSlide class="featuring-carousel__item">
         <div class="featuring-carousel__image">
           <!-- <RouterLink :to="{ name: 'home', params: { id: movie.id } }"> -->
@@ -23,7 +23,7 @@ const options = reactive({ rewind: true, type: 'fade', autoplay: true, lazyLoad:
         <div class="featuring-carousel__info">
           <h3 class="featuring-carousel__title">{{ movie.name }}</h3>
           <p class="featuring-carousel__o-title">{{ movie.origin_name }} - {{ movie.year }}</p>
-          <Button class="featuring-carousel__button" size="large" icon="play" :primary="true">Xem ngay</Button>
+          <Button type="button" class="featuring-carousel__button" size="large" icon="play" :primary="true">Xem ngay</Button>
         </div>
       </SplideSlide>
     </template>
@@ -113,6 +113,7 @@ const options = reactive({ rewind: true, type: 'fade', autoplay: true, lazyLoad:
     align-items: center;
     justify-self: center;
   }
+
   :deep(.splide__arrow) {
     position: static;
     transform: none;

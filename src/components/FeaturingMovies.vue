@@ -6,7 +6,6 @@ import FeaturingCarousel from './base/FeaturingCarousel.vue';
 
 const movies: FeaturingMovieResponse = await getFeaturingMovies();
 const movieItems: [MovieInfo] = await movies.items;
-
 </script>
 
 <template>

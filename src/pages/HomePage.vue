@@ -7,7 +7,7 @@ import Loading from '../components/base/Loading.vue';
 <template>
   <Layout>
     <Transition name="fade">
-      <Suspense>
+      <Suspense timeout="5000">
         <FeaturingMovies />
         <template #fallback>
           <Loading />
