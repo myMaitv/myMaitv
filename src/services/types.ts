@@ -22,7 +22,7 @@ export interface FeaturingMovieResponse {
 }
 
 interface BaseData {
-  name:string;
+  name: string;
   slug: string;
 }
 
@@ -51,7 +51,7 @@ export interface MovieListInfo {
   [key: string]: any;
 }
 
-export interface categoryMoviesResponse {
+export interface CategoryMoviesResponse {
   status: boolean;
   msg: string;
   data: {
@@ -63,6 +63,9 @@ export interface categoryMoviesResponse {
         currentPage: number;
         totalPages: number;
       };
-    }
-  }
+    };
+    APP_DOMAIN_FRONTEND: string;
+    APP_DOMAIN_CDN_IMAGE: string;
+  };
+  [key: string]: any;
 }

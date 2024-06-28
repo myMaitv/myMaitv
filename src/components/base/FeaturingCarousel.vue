@@ -39,7 +39,7 @@ const options = reactive({ rewind: true, type: 'fade', autoplay: true, lazyLoad:
   &__info {
     position: absolute;
     bottom: 0;
-    left: 5vw;
+    left: 2vw;
     width: 40%;
     height: 100%;
     display: flex;

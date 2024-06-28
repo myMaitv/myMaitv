@@ -1,7 +1,6 @@
 <script lang="ts" setup>
 import { getFeaturingMovies } from '../services/featuringMoviesService';
 import type { FeaturingMovieResponse, MovieInfo } from '../services/types';
-import type { Ref } from 'vue';
 import FeaturingCarousel from './base/FeaturingCarousel.vue';
 
 const movies: FeaturingMovieResponse = await getFeaturingMovies();
@@ -20,6 +19,7 @@ const movieItems: [MovieInfo] = await movies.items;
   height: 730px;
   position: relative;
   transition: opacity 1s ease;
+  margin-bottom: 50px;
 
   &__banner {
     position: absolute;
