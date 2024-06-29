@@ -19,7 +19,9 @@ const APP_DOMAIN_CDN_IMAGE = await categoryMoiveList.data.APP_DOMAIN_CDN_IMAGE;
   <div class="category">
     <div class="category__tilte-container">
       <Title class="category__title">{{ title }}</Title>
-      <Button type="button" size="small">Xem thêm</Button>
+      <RouterLink :to="{ name: category, state: { category: title }, force: true }" class="main-menu__link">
+        <Button type="button" size="small">Xem thêm</Button>
+      </RouterLink>
     </div>
     <div class="category__list">
       <MovieList :movies="movieList" :imgHost="APP_DOMAIN_CDN_IMAGE" />

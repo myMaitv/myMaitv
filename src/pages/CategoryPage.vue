@@ -3,6 +3,8 @@ import { onUpdated, ref, onMounted } from 'vue';
 import type { Ref } from 'vue';
 import { useRouter } from 'vue-router';
 import Layout from '../components/layout/Layout.vue';
+import FeaturingMovies from '../components/FeaturingMovies.vue';
+import Loading from '../components/base/Loading.vue';
 
 const category: Ref<string | null> = ref(null);
 onMounted(() => {
@@ -15,6 +17,13 @@ onUpdated(() => {
 </script>
 <template>
   <Layout>
-    <h1>Trang {{ category }}</h1>
+    <Transition name="fade">
+      <Suspense timeout="5000">
+        <FeaturingMovies />
+        <template #fallback>
+          <Loading />
+        </template>
+      </Suspense>
+    </Transition>
   </Layout>
 </template>

@@ -27,7 +27,7 @@ defineProps<{
   imgHost: string;
 }>()
 
-const options = reactive({ type: 'slide', drag: 'free', perPage: 1, lazyLoad: true, autoWidth: true, speed: 300, gap: "20px", pagination: false })
+const options = reactive({ type: 'slide', drag: 'free', wheel: true, perPage: 1, lazyLoad: true, autoWidth: true, speed: 300, gap: "20px", pagination: false, waitForTransition: true })
 
 function categoryListString(categoryTags: MovieCategory[]): string {
   return categoryTags.map(obj => obj.name).join(', ');

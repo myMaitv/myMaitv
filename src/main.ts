@@ -1,4 +1,6 @@
 import { createApp } from "vue";
+import { createPinia } from "pinia";
+const pinia = createPinia();
 import "./style.css";
 import App from "./App.vue";
 import { createWebHistory, createRouter } from "vue-router";
@@ -17,10 +19,15 @@ const routes = [
     component: CategoryPage,
     name: "tv-shows",
   },
+  {
+    path: "/phim-le",
+    component: CategoryPage,
+    name: "phim-le",
+  },
 ];
 const router = createRouter({
   history: createWebHistory(),
   routes,
 });
 
-createApp(App).use(router).mount("#app");
+createApp(App).use(pinia).use(router).mount("#app");
