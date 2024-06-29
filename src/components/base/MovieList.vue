@@ -1,27 +1,33 @@
 <template>
-  <ul v-if="movies" class="movie-list">
-    <li v-for="movie in movies" :key="movie.id" class="movie-list__item">
-      <div class="movie-list__image">
-        <img :src="`${imgHost}/${movie.thumb_url}`" alt="">
-      </div>
-      <div class="movie-list__info">
-        <strong class="movie-list__title">{{ movie.name }}</strong>
-        <p class="movie-list__meta">{{ categoryListString(movie.category) }}</p>
-        <div class="movie-list__play">
-          <Icon src="play" />
+  <Splide v-if="movies" class="movie-list" :options="options">
+    <template v-for="movie in movies" :key="movie.id">
+      <SplideSlide class="movie-list__item">
+        <div class="movie-list__image">
+          <img :src="`${imgHost}/${movie.thumb_url}`" alt="">
         </div>
-      </div>
-      <div class="movie-list__eps-tag">{{ movie.episode_current }}</div>
-    </li>
-  </ul>
+        <div class="movie-list__info">
+          <strong class="movie-list__title">{{ movie.name }}</strong>
+          <p class="movie-list__meta">{{ categoryListString(movie.category) }}</p>
+          <div class="movie-list__play">
+            <Icon src="play" />
+          </div>
+        </div>
+        <div class="movie-list__eps-tag">{{ movie.episode_current }}</div>
+      </SplideSlide>
+    </template>
+  </Splide>
 </template>
 <script lang="ts" setup>
+import { reactive } from 'vue';
+import { Splide, SplideSlide } from '@splidejs/vue-splide';
 import Icon from './Icon.vue';
 import type { MovieCategory, MovieListInfo } from '../../services/types';
 defineProps<{
   movies: MovieListInfo[] | null;
   imgHost: string;
 }>()
+
+const options = reactive({ type: 'slide', drag: 'free', perPage: 1, lazyLoad: true, autoWidth: true, speed: 300, gap: "20px", pagination: false })
 
 function categoryListString(categoryTags: MovieCategory[]): string {
   return categoryTags.map(obj => obj.name).join(', ');
@@ -32,14 +38,22 @@ function categoryListString(categoryTags: MovieCategory[]): string {
   display: flex;
   flex-wrap: nowrap;
   flex-direction: row;
-  gap: 20px;
   margin-top: 30px;
+
+  :deep(.splide__arrow--prev) {
+    left: -2.6em;
+  }
+
+  :deep(.splide__arrow--next) {
+    right: -2.6em;
+  }
 
   &__item {
     list-style: none;
-    flex: 1 1 19%;
+    flex: 1 0 350px;
     position: relative;
     overflow: hidden;
+    height: 250px;
 
     .movie-list__image {
       width: 100%;
@@ -119,7 +133,7 @@ function categoryListString(categoryTags: MovieCategory[]): string {
     cursor: pointer;
 
     :deep(.icon) {
-      background: linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 50%, rgba(252,176,69,1) 100%);
+      background: linear-gradient(90deg, rgba(131, 58, 180, 1) 0%, rgba(253, 29, 29, 1) 50%, rgba(252, 176, 69, 1) 100%);
       width: 35px;
       height: 35px;
       margin-left: 4px;
