@@ -1,29 +1,26 @@
-<script setup lang="ts">
-import { reactive } from 'vue';
+<script lang="ts" setup>
 import { Splide, SplideSlide } from '@splidejs/vue-splide';
 import '@splidejs/vue-splide/css';
-import type { MovieInfo } from '../../services/types';
 import Button from './Button.vue';
-const props = defineProps<{
-  slides: [any] | null
+import type { MovieInfo } from '../../services/types';
+defineProps<{
+  options: any;
+  slides: [MovieInfo] | null;
+  label: string
 }>()
-
-const options = reactive({ rewind: true, type: 'fade', autoplay: true, lazyLoad: true, speed: 1000 })
-
 </script>
-
 <template>
-  <Splide class="featuring-carousel" :options="options" aria-label="Phim nổi bật">
+  <Splide class="master-carousel" :options="options" :aria-label="label">
     <template v-for="(movie) in slides" :key="movie.id">
-      <SplideSlide class="featuring-carousel__item">
-        <div class="featuring-carousel__image">
+      <SplideSlide class="master-carousel__item">
+        <div class="master-carousel__image">
           <!-- <RouterLink :to="{ name: 'home', params: { id: movie.id } }"> -->
           <img :src="movie.thumb_url" :alt="movie.name">
         </div>
-        <div class="featuring-carousel__info">
-          <h3 class="featuring-carousel__title">{{ movie.name }}</h3>
-          <p class="featuring-carousel__o-title">{{ movie.origin_name }} - {{ movie.year }}</p>
-          <Button type="button" class="featuring-carousel__button" size="large" icon="play" :primary="true">Xem ngay</Button>
+        <div class="master-carousel__info">
+          <h3 class="master-carousel__title">{{ movie.name }}</h3>
+          <p class="master-carousel__o-title">{{ movie.origin_name }} - {{ movie.year }}</p>
+          <Button type="button" class="master-carousel__button" size="large" icon="play" :primary="true">Xem ngay</Button>
         </div>
       </SplideSlide>
     </template>
@@ -31,7 +28,7 @@ const options = reactive({ rewind: true, type: 'fade', autoplay: true, lazyLoad:
 </template>
 
 <style lang="scss" scoped>
-.featuring-carousel {
+.master-carousel {
   :deep(.splide__track) {
     height: 100%;
   }

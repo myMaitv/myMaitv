@@ -14,16 +14,17 @@ export const getCategoryMovies = async (
   const store = useCategoryMovieStore();
   try {
     let data;
-    if (store.apiRes[categorySlug]) {
-      data = store.apiRes[categorySlug];
+    const storeIndex = `${categorySlug}_${page}_${limit}`;
+    if (store.apiRes[storeIndex]) {
+      data = store.apiRes[storeIndex];
     } else {
       const response = await api.get<CategoryMoviesResponse>(
         `/v1/api/danh-sach/${categorySlug}?page=${page}&limit=${limit}`
       );
       data = response.data;
-      store.setApiRes(categorySlug, response.data);
+      store.setApiRes(storeIndex, response.data);
       setTimeout(() => {
-        store.clearApiRes(categorySlug);
+        store.clearApiRes(storeIndex);
       }, 5 * 60 * 1000);
     }
     return data;

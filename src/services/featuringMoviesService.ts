@@ -7,7 +7,7 @@ const api = axios.create({
 });
 
 export const getFeaturingMovies = async (
-  page: number = 1
+  page: number = 1,
 ): Promise<FeaturingMovieResponse> => {
   const store = useFeaturingMovieStore();
   try {
