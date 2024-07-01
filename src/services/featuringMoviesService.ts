@@ -24,7 +24,6 @@ export const getFeaturingMovies = async (
         store.clearApiRes();
       }, 5 * 60 * 1000);
     }
-    console.log(data);
     return data;
   } catch (error) {
     if (error instanceof Error) {

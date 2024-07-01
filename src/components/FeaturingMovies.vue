@@ -32,12 +32,6 @@ const movieItems: [MovieInfo] = await movies.items;
     z-index: 0;
     overflow: hidden;
 
-    img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
     &.fade-enter-from {
       opacity: 0;
     }

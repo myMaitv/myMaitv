@@ -66,6 +66,13 @@ defineProps<{
     height: 100%;
     z-index: 0;
 
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top center;
+    }
+
     &::after {
       content: '';
       width: calc(100% + 2px);
