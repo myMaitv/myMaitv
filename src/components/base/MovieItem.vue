@@ -33,6 +33,7 @@ function categoryListString(categoryTags: MovieCategory[]): string {
   position: relative;
   width: 100%;
   height: 100%;
+  overflow: hidden;
 
   &__image {
     width: 100%;

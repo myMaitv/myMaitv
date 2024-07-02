@@ -1,29 +1,35 @@
 <script lang="ts" setup>
-import { onUpdated, ref, onMounted } from 'vue';
-import type { Ref } from 'vue';
-import { useRouter } from 'vue-router';
-import Layout from '../components/layout/Layout.vue';
-import FeaturingMovies from '../components/FeaturingMovies.vue';
-import Loading from '../components/base/Loading.vue';
+import { onUpdated, ref, onMounted } from "vue";
+import type { Ref } from "vue";
+import { useRouter } from "vue-router";
+import Layout from "../components/layout/Layout.vue";
+import CategoryMovieGrid from "../components/CategoryMovieGrid.vue";
+import Loading from "../components/base/Loading.vue";
 
-const category: Ref<string | null> = ref(null);
+const router = useRouter();
+
+const page = parseInt(router.currentRoute.value.query.page ?? 1);
+
+const category: Ref<string> = ref("");
 onMounted(() => {
-  category.value = <string>useRouter().options.history.state.category;
-})
+  category.value = <string>router.options.history.state.category;
+});
 
 onUpdated(() => {
-  category.value = <string>useRouter().options.history.state.category;
-})
+  category.value = <string>router.options.history.state.category;
+});
 </script>
 <template>
   <Layout>
-    <Transition name="fade">
-      <Suspense timeout="5000">
-        <FeaturingMovies />
-        <template #fallback>
-          <Loading />
-        </template>
-      </Suspense>
-    </Transition>
+    <Suspense timeout="5000">
+      <CategoryMovieGrid
+        :title="category"
+        :slug="router.currentRoute.value.name"
+        :page="page"
+      />
+      <template #fallback>
+        <Loading />
+      </template>
+    </Suspense>
   </Layout>
 </template>
