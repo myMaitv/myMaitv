@@ -5,14 +5,14 @@ interface LoadingProps {
   size?: string
 }
 const props = withDefaults(defineProps<LoadingProps>(), {
-  size: '40px'
+  size: '50px'
 })
 </script>
 
 <template>
   <div class="loading">
     <div class="loading__spinner">
-      <Icon src="loading" />
+      <Icon src="loading" :masking="false" />
     </div>
   </div>
 </template>
@@ -40,8 +40,6 @@ const props = withDefaults(defineProps<LoadingProps>(), {
     width: v-bind(size);
     height: v-bind(size);
     :deep(.icon) {
-      background: linear-gradient(-45deg, #ee7752, #f7a05c, #f9ca24, #7ed6df, #34ace0);
-      background-size: 400% 400%;
       animation: gradient 5s ease infinite;
     }
   }

@@ -1,13 +1,19 @@
-<template>
-  <span class="icon" v-if="icon" :style="{ maskImage: `url(${icon})`, WebkitMaskImage: `url(${icon})` }">
+<template v-if="icon">
+  <span class="icon" v-if="masking" :style="{ maskImage: `url(${icon})`, WebkitMaskImage: `url(${icon})` }">
+  </span>
+  <span class="icon icon--non-masking" v-else>
+    <img :src="icon" alt="">
   </span>
 </template>
 <script setup lang="ts">
 import { ref, watchEffect } from 'vue';
 
-const props = defineProps<{
+const props = withDefaults(defineProps<{
   src: string,
-}>()
+  masking?: boolean
+}>(), {
+  masking: true
+})
 
 const icon = ref('');
 
@@ -31,5 +37,9 @@ watchEffect(async () => {
   background: white;
   width: 100%;
   height: 100%;
+
+  &--non-masking {
+    background: none;
+  }
 }
 </style>

@@ -1,15 +1,12 @@
 <script lang="ts" setup>
-import { MovieListInfo, MovieCategory } from "../../services/types";
+import { MovieListInfo } from "../../services/types";
 import Icon from "./Icon.vue";
 import photoPlaceholder from "../../assets/photo.svg?url";
+import { arrayToString } from "../../utils/helper";
 defineProps<{
   movie: MovieListInfo;
   imgHost: string;
 }>();
-
-function categoryListString(categoryTags: MovieCategory[]): string {
-  return categoryTags.map((obj) => obj.name).join(", ");
-}
 </script>
 
 <template>
@@ -24,7 +21,7 @@ function categoryListString(categoryTags: MovieCategory[]): string {
     </div>
     <div class="movie-item__info">
       <strong class="movie-item__title">{{ movie.name }}</strong>
-      <p class="movie-item__meta">{{ categoryListString(movie.category) }}</p>
+      <p class="movie-item__meta">{{ arrayToString(movie.category) }}</p>
       <div class="movie-item__play">
         <RouterLink :to="{ name: 'phim', params: { slug: movie.slug }, force: true }">
           <Icon src="play" />
