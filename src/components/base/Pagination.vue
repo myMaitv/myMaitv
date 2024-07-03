@@ -10,7 +10,7 @@ const props = defineProps<{
 const router = useRouter();
 
 const isFirstDivideShowed = computed(() => {
-  return props.currentPage - 2 > 1;
+  return props.currentPage - 2 >= 1;
 });
 const isLastDivideShowed = computed(() => {
   return props.currentPage + 3 < props.totalPages;
@@ -24,7 +24,6 @@ const renderPages = computed(() => {
   }
   console.log(Array.from({ length: 3 }, (_, i) => i + start));
   return Array.from({ length: 3 }, (_, i) => i + start);
-  
 });
 const activeClass = "pagination__item--active";
 </script>
@@ -91,9 +90,14 @@ const activeClass = "pagination__item--active";
   &__list {
     display: flex;
     gap: 25px;
-    background: linear-gradient(90deg, rgb(131, 58, 180) 0%, rgb(253, 29, 29) 50%, rgb(252, 176, 69) 100%);
+    background: linear-gradient(
+      90deg,
+      rgb(131, 58, 180) 0%,
+      rgb(253, 29, 29) 50%,
+      rgb(252, 176, 69) 100%
+    );
     background-clip: text;
-    
+
     a {
       display: block;
       text-decoration: none;
@@ -107,7 +111,7 @@ const activeClass = "pagination__item--active";
   &__item {
     &--active {
       a {
-        font-size: 2rem;        
+        font-size: 2rem;
       }
       // &::after {
       //   content: "";

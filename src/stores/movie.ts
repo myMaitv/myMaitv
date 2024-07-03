@@ -2,6 +2,7 @@ import { defineStore } from "pinia";
 import type {
   FeaturingMovieResponse,
   CategoryMoviesResponse,
+  MovieDetailResponse,
 } from "@/services/types";
 
 export const useFeaturingMovieStore = defineStore("featuringMovie", {
@@ -27,7 +28,21 @@ export const useCategoryMovieStore = defineStore("categoryMovie", {
       this.apiRes[cateogry] = res;
     },
     clearApiRes(category: string) {
-      this.apiRes[category] = {} as CategoryMoviesResponse;
+      delete this.apiRes[category];
+    },
+  },
+});
+
+export const useMovieDetailStore = defineStore("movie", {
+  state: () => ({
+    apiRes: [] as MovieDetailResponse[],
+  }),
+  actions: {
+    setApiRes(slug: string, res: MovieDetailResponse) {
+      this.apiRes[slug] = res;
+    },
+    clearApiRes(slug: string) {
+      delete this.apiRes[slug];
     },
   },
 });

@@ -1,29 +1,37 @@
 <script lang="ts" setup>
-import { MovieListInfo, MovieCategory } from '../../services/types';
-import Icon from './Icon.vue';
+import { MovieListInfo, MovieCategory } from "../../services/types";
+import Icon from "./Icon.vue";
+import photoPlaceholder from "../../assets/photo.svg?url";
 defineProps<{
   movie: MovieListInfo;
-  imgHost: string
-}>()
+  imgHost: string;
+}>();
 
 function categoryListString(categoryTags: MovieCategory[]): string {
-  return categoryTags.map(obj => obj.name).join(', ');
+  return categoryTags.map((obj) => obj.name).join(", ");
 }
 </script>
 
 <template>
   <div class="movie-item">
     <div class="movie-item__image">
-      <img :src="`${imgHost}/${movie.thumb_url}`" alt="">
+      <img
+        v-if="movie.thumb_url"
+        :src="`${imgHost}/${movie.thumb_url}`"
+        alt="" lazy="loading"
+      />
+      <img v-else :src="photoPlaceholder" width="100" alt="" />
     </div>
     <div class="movie-item__info">
       <strong class="movie-item__title">{{ movie.name }}</strong>
       <p class="movie-item__meta">{{ categoryListString(movie.category) }}</p>
       <div class="movie-item__play">
-        <Icon src="play" />
+        <RouterLink :to="{ name: 'phim', params: { slug: movie.slug }, force: true }">
+          <Icon src="play" />
+        </RouterLink>
       </div>
     </div>
-    <div class="movie-item__eps-tag">{{ movie.episode_current }}</div>
+    <div v-if="movie.episode_current" class="movie-item__eps-tag">{{ movie.episode_current }}</div>
   </div>
 </template>
 
@@ -104,7 +112,7 @@ function categoryListString(categoryTags: MovieCategory[]): string {
     left: 0px;
     background: white;
     border-radius: 50%;
-    transition: all 0.5s cubic-bezier(.05, .64, .02, 1);
+    transition: all 0.5s cubic-bezier(0.05, 0.64, 0.02, 1);
     opacity: 0;
     display: flex;
     align-items: center;
@@ -112,7 +120,12 @@ function categoryListString(categoryTags: MovieCategory[]): string {
     cursor: pointer;
 
     :deep(.icon) {
-      background: linear-gradient(90deg, rgba(131, 58, 180, 1) 0%, rgba(253, 29, 29, 1) 50%, rgba(252, 176, 69, 1) 100%);
+      background: linear-gradient(
+        90deg,
+        rgba(131, 58, 180, 1) 0%,
+        rgba(253, 29, 29, 1) 50%,
+        rgba(252, 176, 69, 1) 100%
+      );
       width: 35px;
       height: 35px;
       margin-left: 4px;

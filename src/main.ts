@@ -4,26 +4,30 @@ const pinia = createPinia();
 import "./style.css";
 import App from "./App.vue";
 import { createWebHistory, createRouter } from "vue-router";
-import HomePage from "./pages/HomePage.vue";
-import CategoryPage from "./pages/CategoryPage.vue";
 
 const routes = [
-  { path: "/", component: HomePage, name: "home" },
+  { path: "/", component: ()=> import('./pages/HomePage.vue'), name: "home" },
   {
     path: "/phim-bo",
-    component: CategoryPage,
+    component: ()=> import('./pages/CategoryPage.vue'), 
     name: "phim-bo",
   },
   {
     path: "/tv-shows",
-    component: CategoryPage,
+    component: ()=> import('./pages/CategoryPage.vue'),
     name: "tv-shows",
   },
   {
     path: "/phim-le",
-    component: CategoryPage,
+    component: ()=> import('./pages/CategoryPage.vue'),
     name: "phim-le",
   },
+  {
+    path: "/phim/:slug/:ep?",
+    component: ()=> import('./pages/MoviePage.vue'),
+    name: "phim",
+    props: true,
+  }
 ];
 const router = createRouter({
   history: createWebHistory(),
