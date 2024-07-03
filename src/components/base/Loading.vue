@@ -1,10 +1,9 @@
 <script lang="ts" setup>
-import { ref } from 'vue';
 import Icon from './Icon.vue';
 interface LoadingProps {
   size?: string
 }
-const props = withDefaults(defineProps<LoadingProps>(), {
+withDefaults(defineProps<LoadingProps>(), {
   size: '50px'
 })
 </script>
@@ -39,6 +38,7 @@ const props = withDefaults(defineProps<LoadingProps>(), {
     animation: rotate 2s linear infinite;
     width: v-bind(size);
     height: v-bind(size);
+
     :deep(.icon) {
       animation: gradient 5s ease infinite;
     }
@@ -54,15 +54,17 @@ const props = withDefaults(defineProps<LoadingProps>(), {
 }
 
 @keyframes gradient {
-	0% {
-		background-position: 0% 50%;
-	}
-	50% {
-		background-position: 100% 50%;
-	}
-	100% {
-		background-position: 0% 50%;
-	}
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 @keyframes rotate {

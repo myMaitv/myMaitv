@@ -7,18 +7,16 @@ const api = axios.create({
 });
 
 export const getMovieDetail = async (
-  slug : string
+  slug: string
 ): Promise<MovieDetailResponse> => {
   const store = useMovieDetailStore();
   try {
-    let data;
+    let data : MovieDetailResponse = {} as MovieDetailResponse;
     const storeIndex = `${slug}`;
-    if (store.apiRes[storeIndex]) {
-      data = store.apiRes[storeIndex];
+    if (store.apiRes.has(storeIndex)) {
+      data = store.apiRes.get(storeIndex) as MovieDetailResponse;
     } else {
-      const response = await api.get<MovieDetailResponse>(
-        `/phim/${slug}`
-      );
+      const response = await api.get<MovieDetailResponse>(`/phim/${slug}`);
       data = response.data;
       store.setApiRes(storeIndex, data);
       setTimeout(() => {
@@ -33,4 +31,4 @@ export const getMovieDetail = async (
       throw new Error("Failed to fetch movie detail");
     }
   }
-}
+};

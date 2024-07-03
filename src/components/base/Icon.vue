@@ -1,13 +1,13 @@
-<template v-if="icon">
-  <span class="icon" v-if="masking" :style="{ maskImage: `url(${icon})`, WebkitMaskImage: `url(${icon})` }">
+<template>
+  <span class="icon" v-if="masking" :style="{ maskImage: `url('${icon}')`, WebkitMaskImage: `url('${icon}')` }" :alt="`${icon}`">
   </span>
   <span class="icon icon--non-masking" v-else>
-    <img :src="icon" alt="">
+    <img :src="<string>icon" alt="">
   </span>
 </template>
 <script setup lang="ts">
 import { ref, watchEffect } from 'vue';
-
+import type { Ref } from 'vue';
 const props = withDefaults(defineProps<{
   src: string,
   masking?: boolean
@@ -15,12 +15,14 @@ const props = withDefaults(defineProps<{
   masking: true
 })
 
-const icon = ref('');
+const icon: Ref<string | null> = ref(null);
+const rendered = ref('false');
 
 watchEffect(async () => {
   try {
     const svgModule = await import(`../../assets/${props.src}.svg?url`);
-    icon.value = svgModule.default || svgModule;
+    icon.value = await svgModule.default || svgModule;
+    rendered.value = 'true';
   } catch (error) {
     console.log(error);
   }

@@ -3,7 +3,7 @@ import type {
   FeaturingMovieResponse,
   CategoryMoviesResponse,
   MovieDetailResponse,
-} from "@/services/types";
+} from "../services/types";
 
 export const useFeaturingMovieStore = defineStore("featuringMovie", {
   state: () => ({
@@ -21,28 +21,28 @@ export const useFeaturingMovieStore = defineStore("featuringMovie", {
 
 export const useCategoryMovieStore = defineStore("categoryMovie", {
   state: () => ({
-    apiRes: [] as CategoryMoviesResponse[],
+    apiRes: new Map<string, CategoryMoviesResponse>(),
   }),
   actions: {
     setApiRes(cateogry: string, res: CategoryMoviesResponse) {
-      this.apiRes[cateogry] = res;
+      this.apiRes.set(cateogry, res);
     },
     clearApiRes(category: string) {
-      delete this.apiRes[category];
+      this.apiRes.delete(category);
     },
   },
 });
 
 export const useMovieDetailStore = defineStore("movie", {
   state: () => ({
-    apiRes: [] as MovieDetailResponse[],
+    apiRes: new Map<string, MovieDetailResponse>(),
   }),
   actions: {
     setApiRes(slug: string, res: MovieDetailResponse) {
-      this.apiRes[slug] = res;
+      this.apiRes.set(slug, res);
     },
     clearApiRes(slug: string) {
-      delete this.apiRes[slug];
+      this.apiRes.delete(slug);
     },
   },
 });

@@ -6,7 +6,6 @@
   </div>
 </template>
 <script lang="ts" setup>
-import { ref } from 'vue';
 import Icon from './Icon.vue';
 
 interface InputProps {

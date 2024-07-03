@@ -13,10 +13,10 @@ export const getCategoryMovies = async (
 ): Promise<CategoryMoviesResponse> => {
   const store = useCategoryMovieStore();
   try {
-    let data;
+    let data : CategoryMoviesResponse = {} as CategoryMoviesResponse;
     const storeIndex = `${categorySlug}_${page}_${limit}`;
-    if (store.apiRes[storeIndex]) {
-      data = store.apiRes[storeIndex];
+    if (store.apiRes.has(storeIndex)) {
+      data = store.apiRes.get(storeIndex) as CategoryMoviesResponse;
     } else {
       const response = await api.get<CategoryMoviesResponse>(
         `/v1/api/danh-sach/${categorySlug}?page=${page}&limit=${limit}`

@@ -1,8 +1,6 @@
 <script lang="ts" setup>
-import { ref } from 'vue';
-import type { Ref } from 'vue';
 import Icon from './Icon.vue';
-const props = withDefaults(defineProps<{
+withDefaults(defineProps<{
   primary?: boolean,
   type: 'button' | 'submit' | 'reset',
   icon?: string | null,

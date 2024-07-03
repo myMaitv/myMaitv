@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { ref, watchEffect, computed, onMounted } from "vue";
-import type { Ref, ComputedRef } from "vue";
+import type { Ref } from "vue";
 import { useRouter, useRoute } from "vue-router";
 const router = useRouter();
 const route = useRoute();
@@ -31,7 +31,7 @@ watchEffect(() => {
     router.push({ name: route.name, params: { ...route.params, ...{ ep: episodes[0].server_data[0].slug } }, force: true });
   }
 })
-const verified_url : ComputedRef<string> = computed(async () => {
+const verified_url = computed(async () => {
   if (movie.poster_url) {
     return movie.poster_url;
   } else {

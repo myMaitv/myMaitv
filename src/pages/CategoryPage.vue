@@ -8,7 +8,7 @@ import Loading from "../components/base/Loading.vue";
 
 const router = useRouter();
 
-const page = parseInt(router.currentRoute.value.query.page ?? 1);
+const page: number = parseInt(router.currentRoute.value.query.page as string ?? "1");
 
 const category: Ref<string> = ref("");
 onMounted(() => {
@@ -24,7 +24,7 @@ onUpdated(() => {
     <Suspense timeout="5000">
       <CategoryMovieGrid
         :title="category"
-        :slug="router.currentRoute.value.name"
+        :slug="router.currentRoute.value.name as string"
         :page="page"
       />
       <template #fallback>

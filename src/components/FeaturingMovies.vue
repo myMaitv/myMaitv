@@ -6,7 +6,7 @@ import MasterCarousel from './base/MasterCarousel.vue';
 const options = reactive({ rewind: true, type: 'fade', autoplay: true, lazyLoad: true, speed: 1000 });
 
 const movies: FeaturingMovieResponse = await getFeaturingMovies();
-const movieItems: [MovieInfo] = await movies.items;
+const movieItems: MovieInfo[] = await movies.items;
 </script>
 
 <template>

@@ -5,7 +5,7 @@ import Button from './Button.vue';
 import type { MovieInfo } from '../../services/types';
 defineProps<{
   options: any;
-  slides: [MovieInfo] | null;
+  slides: MovieInfo[] | null;
   label: string
 }>()
 </script>

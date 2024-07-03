@@ -8,4 +8,7 @@ export default defineConfig({
   resolve: {
     alias: {},
   },
+  build: {
+    assetsInlineLimit: 0
+  },
 });
