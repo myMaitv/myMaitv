@@ -14,7 +14,7 @@ const epList: string[] = epData.map((ep: Episode) => ep.slug);
 <template>
   <ul class="movie-episodes">
     <li class="movie-episodes__item" v-for="(index) in totalEp" :key="index">
-      <RouterLink :to="{ name: route.name, params: { ...route.params, ...{ ep: epList[index-1] } }, force: true }" class="movie-episodes__link" :class="{ 'movie-episodes__link--active': index === currentEp + 1, 'movie-episodes__link--disable': epData[index] === undefined }">
+      <RouterLink :to="{ name: route.name, params: { ...route.params, ...{ ep: epList[index-1] } }, force: true }" class="movie-episodes__link" :class="{ 'movie-episodes__link--active': index === currentEp + 1, 'movie-episodes__link--disable': epData[index-1] === undefined }">
         {{ index }}
       </RouterLink>
     </li>
